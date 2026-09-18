@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="王治文作品集展示，收录交互装置、舞台视觉与异形影像作品，记录从视觉实验到项目落地的创作探索。" />
+    <title>王治文作品集展示</title>
+    <link rel="icon" type="image/webp" href="assets/logo.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos" rel="stylesheet" />
+    <link href="assets/fontawesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="editor.css" />
+    <link rel="stylesheet" href="portfolio.css" />
+    <script src="media-manifest.js" defer></script>
+    <script src="portfolio.js" defer></script>
+    <script src="main.js" defer></script>
+    <script src="bubbles.js" defer></script>
+    <script src="hero-reveal.js" defer></script>
+    <script src="editor.js" defer></script>
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true">
+      <img class="bg-image" src="assets/poster.jpg" alt="" hidden />
+      <video class="bg-video" autoplay muted loop playsinline preload="auto" poster="assets/poster.jpg">
+        <source src="assets/background-clear.mp4" type="video/mp4" />
+      </video>
+      <canvas class="bg-reveal" aria-hidden="true"></canvas>
+      <div class="bg-shade"></div>
+      <canvas class="bg-bubbles" aria-hidden="true"></canvas>
+    </div>
+    <canvas class="ambient-bubbles" aria-hidden="true"></canvas>
+    <button class="editor-launch icon-button" type="button" aria-label="自定义网页" title="自定义网页" aria-controls="site-editor" aria-expanded="false">
+      <i class="fa-solid fa-sliders" aria-hidden="true"></i>
+    </button>
+
+    <div class="page">
+      <header class="header">
+        <a class="logo" href="#home" aria-label="返回首页">
+          <img src="assets/logo.webp" alt="" width="52" height="52" />
+        </a>
+        <nav class="nav-pill" aria-label="主导航">
+          <a class="nav-link active" href="#home" aria-current="page">首页</a>
+          <a class="nav-link" href="#works" data-panel="works">精选作品</a>
+          <a class="nav-link" href="#practice" data-panel="practice">创作方向</a>
+          <a class="nav-link" href="#about" data-panel="about">关于我</a>
+        </nav>
+        <button class="sign-in desktop-sign-in" type="button" data-panel="contact">联系合作</button>
+        <button class="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+
+      <main class="hero" id="home">
+        <div class="hero-content">
+          <div class="trust-row anim" style="--d: 0.05s">
+            <div class="trust-avatars" aria-hidden="true">
+              <span class="avatar a1"><span><i class="fa-solid fa-hand-pointer"></i></span></span>
+              <span class="avatar a2"><span><i class="fa-solid fa-film"></i></span></span>
+              <span class="avatar a3"><span><i class="fa-solid fa-shapes"></i></span></span>
+            </div>
+            <span class="trust-pill">交互装置 · 舞台视觉 · 异形影像</span>
+          </div>
+          <h1 class="headline"><span>王治文</span><span>作品集展示</span></h1>
+          <p class="subhead anim" style="--d: 0.28s">以动态影像连接感知与空间，<br />在交互、舞台与视觉实验中，让想象成为现场。</p>
+          <button class="cta anim" type="button" data-panel="works" style="--d: 0.4s">浏览作品</button>
+        </div>
+      </main>
+
+      <footer class="stats" aria-label="作品集创作领域">
+        <div class="stat anim" style="--d: 0.5s">
+          <span class="stat-icon" aria-hidden="true">&lt;</span>
+          <span class="stat-value">交互装置</span>
+          <span class="stat-label">感知与反馈</span>
+        </div>
+        <div class="stat anim" style="--d: 0.58s">
+          <span class="stat-icon" aria-hidden="true">%</span>
+          <span class="stat-value">舞台视觉</span>
+          <span class="stat-label">空间与现场</span>
+        </div>
+        <div class="stat anim" style="--d: 0.66s">
+          <span class="stat-icon" aria-hidden="true">*</span>
+          <span class="stat-value">异形影像</span>
+          <span class="stat-label">形态与想象</span>
+        </div>
+        <div class="stat anim" style="--d: 0.74s">
+          <span class="stat-icon" aria-hidden="true">#</span>
+          <span class="stat-value">动态实验</span>
+          <span class="stat-label">运动与生成</span>
+        </div>
+      </footer>
+    </div>
+
+    <section class="directory-screen content-screen" id="works" aria-labelledby="portfolio-title">
+      <header class="section-header">
+        <a class="archive-home" href="#home" aria-label="返回首页"><img src="assets/logo.webp" alt="" /></a>
+        <span>PORTFOLIO / INDEX</span><span class="screen-number">02 / 06</span>
+      </header>
+      <div class="directory-heading"><p class="section-kicker">王治文 / SELECTED WORKS</p><h2 id="portfolio-title">作品与我</h2><p class="portfolio-description">交互、舞台、异形影像，以及创作背后的我。</p></div>
+      <nav class="directory-grid" aria-label="作品集目录">
+        <article class="directory-item"><a href="#interaction" class="directory-link"><div class="directory-cover" data-cover="work1"></div><div class="directory-label"><span>03 PROJECTS / 06 MEDIA</span><h3 data-copy="directory-interaction">交互系列</h3><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></div></a><button class="cover-edit icon-button" data-media-edit="work1" aria-label="替换交互系列封面" title="替换交互系列封面"><i class="fa-solid fa-image" aria-hidden="true"></i></button></article>
+        <article class="directory-item"><a href="#stage" class="directory-link"><div class="directory-cover" data-cover="work2"></div><div class="directory-label"><span>04 PROJECTS / 12 MEDIA</span><h3 data-copy="directory-stage">舞台系列</h3><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></div></a><button class="cover-edit icon-button" data-media-edit="work2" aria-label="替换舞台系列封面" title="替换舞台系列封面"><i class="fa-solid fa-image" aria-hidden="true"></i></button></article>
+        <article class="directory-item"><a href="#experimental" class="directory-link"><div class="directory-cover" data-cover="work3"></div><div class="directory-label"><span>06 PROJECTS / 06 MEDIA</span><h3 data-copy="directory-experimental">异形系列</h3><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></div></a><button class="cover-edit icon-button" data-media-edit="work3" aria-label="替换异形系列封面" title="替换异形系列封面"><i class="fa-solid fa-image" aria-hidden="true"></i></button></article>
+        <article class="directory-item"><a href="#about-profile" class="directory-link"><div class="directory-cover" data-cover="about-cover"></div><div class="directory-label"><span>04 / PROFILE</span><h3 data-copy="directory-about">关于我</h3><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></div></a><button class="cover-edit icon-button" data-media-edit="about-cover" aria-label="替换个人介绍封面" title="替换个人介绍封面"><i class="fa-solid fa-image" aria-hidden="true"></i></button></article>
+      </nav>
+      <footer class="section-footer"><span class="portfolio-ending">影像不止被观看，也被参与、被体验。</span><a href="#interaction" aria-label="进入交互系列" title="进入交互系列"><i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a></footer>
+    </section>
+    <template id="archive-screen-template">
+    <section class="portfolio-section content-screen">
+      <div class="portfolio-toolbar">
+        <a href="#home" class="archive-home" aria-label="返回第一屏" title="返回第一屏"><img src="assets/logo.webp" alt="" /></a>
+        <nav class="series-nav" aria-label="系列导航"><a href="#works" title="返回目录" aria-label="返回目录"><i class="fa-solid fa-border-all" aria-hidden="true"></i></a><a href="#interaction">交互</a><a href="#stage">舞台</a><a href="#experimental">异形</a><a href="#about-profile">关于我</a></nav>
+        <div class="archive-tools">
+          <span class="portfolio-count" role="status" aria-live="polite">01 / 06</span>
+          <button class="archive-play icon-button" type="button" aria-label="自动切换作品" title="自动切换作品" aria-pressed="false"><i class="fa-solid fa-play" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="archive-stage" role="region" aria-roledescription="轮播" aria-label="作品展示">
+        <div class="archive-stage-backdrop" aria-hidden="true"></div>
+        <div class="archive-art" aria-hidden="true"></div>
+        <div class="archive-copy">
+          <p class="portfolio-eyebrow">SELECTED WORKS / 作品档案</p>
+          <div class="archive-title-window"><h2 class="archive-active-title"></h2></div>
+          <div class="archive-meta"><span class="archive-active-category"></span><span class="archive-active-kind"></span><span class="archive-active-index"></span><span class="archive-rating" aria-hidden="true">·····</span></div>
+        </div>
+        <div class="archive-stage-actions">
+          <button class="icon-button archive-video-toggle" type="button" aria-label="持续播放当前视频" title="持续播放当前视频" aria-pressed="false" hidden><i class="fa-solid fa-play" aria-hidden="true"></i></button>
+          <button class="icon-button archive-upload" type="button" aria-label="添加当前作品素材" title="添加当前作品素材"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+          <button class="icon-button archive-expand" type="button" aria-label="放大查看当前作品" title="放大查看当前作品"><i class="fa-solid fa-expand" aria-hidden="true"></i></button>
+        </div>
+        <div class="archive-strip">
+          <button class="archive-prev icon-button" type="button" aria-label="上一件展示作品" title="上一件展示作品"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+          <div class="archive-rail"><div class="portfolio-grid" role="group" aria-label="作品缩略图"></div></div>
+          <button class="archive-next icon-button" type="button" aria-label="下一件展示作品" title="下一件展示作品"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
+        <span class="archive-announcement sr-only" role="status" aria-live="polite"></span>
+      </div>
+      <footer class="portfolio-footer">
+        <span class="series-footer-label"></span>
+        <a class="next-screen back-top" aria-label="下一个系列" title="下一个系列"><i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+      </footer>
+    </section>
+    </template>
+    <div id="series-screens"></div>
+    <section class="about-screen content-screen" id="about-profile" aria-labelledby="profile-name">
+      <header class="section-header"><a href="#works" class="icon-button" title="返回目录" aria-label="返回目录"><i class="fa-solid fa-border-all" aria-hidden="true"></i></a><span>ABOUT / THE ARTIST</span><span class="screen-number">06 / 06</span></header>
+      <div class="profile-layout">
+        <div class="profile-visual"><div class="profile-art" data-cover="portrait"></div><button class="cover-edit icon-button" data-media-edit="portrait" title="替换个人头像" aria-label="替换个人头像"><i class="fa-solid fa-image" aria-hidden="true"></i></button><p data-copy="profile-art-caption">王治文 / 新媒体数字艺术</p></div>
+        <div class="profile-copy"><p class="section-kicker">NEW MEDIA ARTIST</p><h2 id="profile-name" data-copy="profile-name">王治文</h2><p class="profile-role" data-copy="profile-role">新媒体数字艺术创作者<br />数字媒体艺术硕士研究生</p><p class="profile-bio" data-copy="profile-bio">以动态影像连接感知与空间，关注交互装置、舞台视觉与生成艺术。</p>
+          <dl class="profile-details"><div><dt data-copy="profile-projects-label">项目经历</dt><dd data-copy="profile-projects">参与苏州博物馆落地数字文物制作、许嵩「呼吸之野」演唱会舞美主视觉、虞书欣 blossom 生日环节画面主视觉，以及深圳国际智慧显示及系统集成展雷达交互项目。</dd></div><div><dt data-copy="profile-social-label">小红书</dt><dd data-copy="profile-social">海龟不是汤</dd></div></dl>
+          <div class="profile-work-links"><button data-panel="resonance"><span data-copy="profile-work1">繁花共振</span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></button><button data-panel="rebirth"><span data-copy="profile-work2">碎花与重生</span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></button></div>
+          <button class="profile-contact" data-panel="contact"><span data-copy="profile-contact">联系合作</span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <footer class="section-footer"><span data-copy="profile-ending">让想象，发生在现场。</span><a href="#home" title="返回首页" aria-label="返回首页"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></a></footer>
+    </section>
+    <dialog class="project-viewer" aria-labelledby="project-viewer-title">
+      <header class="viewer-header">
+        <div><p class="viewer-category"></p><h2 id="project-viewer-title"></h2></div>
+        <button class="icon-button viewer-close" type="button" aria-label="关闭作品" title="关闭作品"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </header>
+      <div class="viewer-media"></div>
+      <footer class="viewer-footer">
+        <button class="icon-button viewer-prev" type="button" aria-label="上一件作品" title="上一件作品"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+        <span class="viewer-position"></span>
+        <button class="icon-button viewer-next" type="button" aria-label="下一件作品" title="下一件作品"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+      </footer>
+    </dialog>
+
+    <div class="mobile-overlay" hidden></div>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="移动端导航" hidden>
+      <a class="mobile-link active" href="#home" aria-current="page" style="--i: 0">首页</a>
+      <a class="mobile-link" href="#works" data-panel="works" style="--i: 1">精选作品</a>
+      <a class="mobile-link" href="#practice" data-panel="practice" style="--i: 2">创作方向</a>
+      <a class="mobile-link" href="#about" data-panel="about" style="--i: 3">关于我</a>
+      <button class="sign-in" type="button" data-panel="contact" style="--i: 4">联系合作</button>
+    </nav>
+
+    <dialog class="detail-dialog" aria-labelledby="dialog-title">
+      <button class="dialog-close" type="button" aria-label="关闭弹窗" title="关闭">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <div id="dialog-content"></div>
+    </dialog>
+
+    <template id="panel-works">
+      <p class="eyebrow">精选作品</p>
+      <h2 id="dialog-title">从创意到现场</h2>
+      <p class="dialog-intro">三个作品系列，记录我在交互、舞台与异形影像中的创作探索。</p>
+      <dl class="product-list">
+        <div><dt>交互系列</dt><dd>以感知与反馈连接观众和作品，呈现交互项目的现场体验。</dd></div>
+        <div><dt>舞台系列</dt><dd>让动态视觉融入舞台空间，记录影像与现场相遇的时刻。</dd></div>
+        <div><dt>异形系列</dt><dd>围绕形态变化、手势交互与音画关系，探索影像的更多可能。</dd></div>
+      </dl>
+      <div class="work-gallery"></div>
+      <button class="dialog-primary" type="button" data-panel="contact">聊聊合作 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    </template>
+    <template id="panel-practice">
+      <p class="eyebrow">创作方向</p>
+      <h2 id="dialog-title">在影像与空间之间</h2>
+      <p class="dialog-intro">从屏幕里的动态实验，到真实空间中的视觉表达。</p>
+      <dl class="product-list">
+        <div><dt>感知与交互</dt><dd>探索手势、声音与画面之间的回应，让观众参与作品的发生。</dd></div>
+        <div><dt>舞台与空间</dt><dd>关注影像在空间中的节奏、层次与氛围，让视觉成为现场的一部分。</dd></div>
+        <div><dt>形态与运动</dt><dd>以动态实验探索形态的变化，在抽象画面中寻找新的表达。</dd></div>
+      </dl>
+      <button class="dialog-primary" type="button" data-panel="works">了解作品系列 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    </template>
+    <template id="panel-contact">
+      <p class="eyebrow">联系合作</p>
+      <h2 id="dialog-title">让下一个想法发生</h2>
+      <p class="dialog-intro">关于交互装置、舞台视觉或动态影像，期待与你一起探索。</p>
+      <form class="project-form">
+        <label>你的称呼<input name="name" autocomplete="name" required maxlength="100" /></label>
+        <label>联系邮箱<input name="email" type="email" autocomplete="email" required maxlength="254" /></label>
+        <label>合作想法<textarea name="project" rows="3" placeholder="聊聊项目方向、展示场景与预期时间" required maxlength="4000"></textarea></label>
+        <button class="dialog-primary" type="submit">下载合作意向书 <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></button>
+        <p class="form-note" role="status">意向书仅保存到你的设备，不会发送给作品集作者。</p>
+      </form>
+    </template>
+    <template id="panel-about">
+      <p class="eyebrow">关于我</p>
+      <h2 id="dialog-title">你好，我是王治文</h2>
+      <img class="about-portrait" alt="个人头像" hidden />
+      <p class="dialog-intro">欢迎来到我的作品集。这里收录了交互、舞台与异形影像系列，记录从视觉实验到项目落地的创作过程。</p>
+      <p class="dialog-intro">我希望用动态影像连接感知与空间，让作品不止被观看，也能被参与、被体验。</p>
+      <button class="dialog-primary" type="button" data-panel="contact">联系合作 <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    </template>
+    <template id="panel-resonance">
+      <p class="eyebrow">作品介绍 / TOUCHDESIGNER · KINECT</p>
+      <h2 id="dialog-title">繁花共振</h2>
+      <div class="story-media" data-media-key="about-resonance"></div>
+      <p class="dialog-intro">《繁花共振》是一件基于 TouchDesigner 开发的交互式数字艺术装置，探索“虚拟生命”与“实体感知”之间的临界点。通过 Kinect 体感捕捉技术，将参与者的动作转化为花丛中的能量涟漪。</p>
+    </template>
+    <template id="panel-rebirth">
+      <p class="eyebrow">作品介绍 / TOUCHDESIGNER · KINECT</p>
+      <h2 id="dialog-title">碎花与重生</h2>
+      <div class="story-media" data-media-key="about-rebirth"></div>
+      <p class="dialog-intro">《碎花与重生》是一件基于 TouchDesigner 开发的深度体感交互装置。作品将一朵绚丽的三维数字花卉转化为可被“雕刻”的材质，探索破坏与重建的辩证美学。</p>
+      <p class="dialog-intro">作品表达数字时代的脆弱性与可控性。花是生与死的象征，而 Kinect 赋予观众的“穿透之力”，让观众在破坏中获得一种掌控数字物体的实体触感。</p>
+    </template>
+
+    <aside class="site-editor" id="site-editor" aria-labelledby="editor-heading" hidden>
+      <div class="editor-header">
+        <div><span class="editor-kicker">PORTFOLIO STUDIO</span><h2 id="editor-heading">自定义</h2></div>
+        <div class="editor-actions">
+          <button class="icon-button editor-lock" type="button" aria-label="锁定自定义" title="锁定自定义"><i class="fa-solid fa-lock" aria-hidden="true"></i></button>
+          <button class="icon-button editor-close" type="button" aria-label="关闭编辑器" title="预览网页"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="editor-tabs" role="tablist" aria-label="编辑分类">
+        <button id="tab-text" role="tab" aria-selected="true" aria-controls="editor-text" data-tab="text"><i class="fa-solid fa-font" aria-hidden="true"></i>文字</button>
+        <button id="tab-media" role="tab" aria-selected="false" aria-controls="editor-media" data-tab="media" tabindex="-1"><i class="fa-solid fa-image" aria-hidden="true"></i>媒体</button>
+        <button id="tab-style" role="tab" aria-selected="false" aria-controls="editor-style" data-tab="style" tabindex="-1"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>样式</button>
+      </div>
+      <div class="editor-scroll">
+        <section id="editor-text" role="tabpanel" aria-labelledby="tab-text"></section>
+        <section id="editor-media" role="tabpanel" aria-labelledby="tab-media" hidden></section>
+        <section id="editor-style" role="tabpanel" aria-labelledby="tab-style" hidden>
+          <div class="editor-section">
+            <h3>标题</h3>
+            <div class="segmented" role="group" aria-label="标题风格">
+              <button type="button" data-title-style="dots" aria-pressed="true">点阵</button>
+              <button type="button" data-title-style="plain" aria-pressed="false">简约</button>
+            </div>
+            <label class="editor-field">标题比例<output id="scale-value">100%</output><input id="headline-scale" type="range" min="70" max="130" step="5" value="100" /></label>
+            <label class="editor-field">点阵密度<select id="dot-density"><option value="fine">细密</option><option value="medium" selected>标准</option><option value="coarse">疏朗</option></select></label>
+          </div>
+          <div class="editor-section">
+            <h3>背景</h3>
+            <label class="editor-field">遮罩深度<output id="shade-value">48%</output><input id="background-shade" type="range" min="0" max="85" value="48" /></label>
+            <label class="editor-field">画面焦点<output id="position-value">50%</output><input id="background-position" type="range" min="0" max="100" value="50" /></label>
+            <label class="editor-field">画面适配<select id="background-fit"><option value="cover">铺满</option><option value="contain">完整画面</option></select></label>
+            <label class="editor-check"><input id="background-motion" type="checkbox" checked />播放背景视频</label>
+          </div>
+          <div class="editor-section">
+            <h3>蒙版拖尾</h3>
+            <label class="editor-check"><input id="background-reveal" type="checkbox" checked />开启鼠标与触屏蒙版</label>
+            <label class="editor-check"><input id="trail-bubbles" type="checkbox" checked />气泡尾迹</label>
+            <label class="editor-field">笔触大小<output id="brush-value">72</output><input id="trail-brush" type="range" min="28" max="120" value="72" /></label>
+            <label class="editor-field">拖尾亮度<output id="brightness-value">140%</output><input id="trail-brightness" type="range" min="70" max="190" value="140" /></label>
+            <label class="editor-field">拖尾时间<output id="life-value">1.24s</output><input id="trail-life" type="range" min="400" max="2000" step="20" value="1240" /></label>
+          </div>
+          <div class="editor-section">
+            <h3>页面氛围</h3>
+            <label class="editor-check"><input id="ambient-bubbles" type="checkbox" checked />漂浮反光气泡</label>
+          </div>
+          <div class="editor-section">
+            <h3>备份</h3>
+            <div class="editor-actions">
+              <button class="editor-command" id="export-config" type="button"><i class="fa-solid fa-download" aria-hidden="true"></i>导出备份</button>
+              <button class="editor-command" id="import-config" type="button"><i class="fa-solid fa-upload" aria-hidden="true"></i>导入备份</button>
+            </div>
+            <input id="backup-file" type="file" accept=".portfolio,application/json" hidden />
+            <button class="editor-command danger-command" id="reset-config" type="button"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i>恢复默认</button>
+          </div>
+        </section>
+      </div>
+      <footer class="editor-footer">
+        <p id="editor-status" role="status" aria-live="polite">正在读取本地配置…</p>
+        <div class="editor-actions">
+          <button class="editor-command" id="revert-config" type="button" disabled><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i>撤销更改</button>
+          <button class="editor-save" id="save-config" type="button" disabled><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i>保存</button>
+        </div>
+      </footer>
+    </aside>
+    <dialog class="editor-auth" aria-labelledby="auth-heading">
+      <form id="editor-auth-form">
+        <div class="auth-heading"><i class="fa-solid fa-lock" aria-hidden="true"></i><button class="icon-button auth-close" type="button" aria-label="取消验证" title="取消"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
+        <h2 id="auth-heading">作者验证</h2>
+        <label for="editor-password">访问密码</label>
+        <div class="auth-password">
+          <input id="editor-password" type="password" inputmode="numeric" autocomplete="current-password" maxlength="32" aria-describedby="auth-error" required />
+          <button class="icon-button auth-visibility" type="button" aria-label="显示密码" title="显示密码" aria-pressed="false"><i class="fa-solid fa-eye" aria-hidden="true"></i></button>
+        </div>
+        <p id="auth-error" role="status" aria-live="polite"></p>
+        <button class="auth-submit" type="submit"><i class="fa-solid fa-unlock-keyhole" aria-hidden="true"></i>解锁自定义</button>
+      </form>
+    </dialog>
+    <dialog class="confirm-dialog" aria-labelledby="confirm-heading">
+      <h2 id="confirm-heading">恢复默认内容？</h2>
+      <p>当前自定义文字和媒体将被替换。保存后生效。</p>
+      <div class="editor-actions">
+        <button class="editor-command" type="button" data-confirm="cancel">取消</button>
+        <button class="editor-save" type="button" data-confirm="accept">恢复默认</button>
+      </div>
+    </dialog>
+  </body>
+</html>

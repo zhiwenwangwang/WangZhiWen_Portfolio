@@ -1,0 +1,16 @@
+# This repository accepts display exports only.
+*.mov
+*.MOV
+*.docx
+*.psd
+*.psb
+*.aep
+*.toe
+*.portfolio
+*.zip
+originals/
+private/
+checks/
+tools/
+.DS_Store
+Thumbs.db
