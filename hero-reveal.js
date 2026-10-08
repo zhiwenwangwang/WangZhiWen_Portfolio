@@ -8,7 +8,7 @@
   const mask = document.createElement("canvas"), maskContext = mask.getContext("2d");
   const layer = document.createElement("canvas"), layerContext = layer.getContext("2d");
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
-  let width = 1, height = 1, scale = 1, radius = 72, trailBrightness = 1.4, lifetime = 1240;
+  let width = 1, height = 1, scale = 1, radius = 72, trailBrightness = 1.78, lifetime = 1240;
   let stamps = [], bubbles = [], previous = null, seed = 1, raf = 0, visible = true, enabled = true;
   let lastEmission = 0, bubbleTravel = 0;
   let underlay = null, underlayURL = "", grain;
@@ -76,16 +76,20 @@
   function emitBubble(x, y, now, direction, speed) {
     if (document.body.dataset.trailBubbles === "false") return;
     const random = randomFor(seed++ * 6151);
-    const spread = radius * (.25 + random() * .48), side = random() > .5 ? 1 : -1;
-    bubbles.push({
-      x: x + Math.cos(direction + Math.PI / 2) * spread * side,
-      y: y + Math.sin(direction + Math.PI / 2) * spread * side,
-      born: now + 90 + random() * 150, life: 820 + random() * 380,
-      radius: radius * (.08 + random() * .16),
-      vx: -Math.cos(direction) * Math.min(65, speed * .045) * scale + (random() - .5) * 24 * scale,
-      vy: -(24 + random() * 46) * scale, phase: random() * Math.PI * 2,
-    });
-    if (bubbles.length > 65) bubbles.splice(0, bubbles.length - 65);
+    const bubbleLimit = clamp(Number(document.body.dataset.trailBubbleCount || 120), 20, 240);
+    const count = Math.max(1, Math.round(bubbleLimit / 30 + random() * 2));
+    for (let i = 0; i < count; i++) {
+      const spread = radius * (.16 + random() * .62), side = random() > .5 ? 1 : -1;
+      bubbles.push({
+        x: x + Math.cos(direction + Math.PI / 2) * spread * side,
+        y: y + Math.sin(direction + Math.PI / 2) * spread * side,
+        born: now, life: lifetime * (.8 + random() * .5),
+        radius: radius * (.055 + random() * .18),
+        vx: -Math.cos(direction) * Math.min(78, speed * .052) * scale + (random() - .5) * 34 * scale,
+        vy: -(30 + random() * 62) * scale, phase: random() * Math.PI * 2,
+      });
+    }
+    if (bubbles.length > bubbleLimit) bubbles.splice(0, bubbles.length - bubbleLimit);
   }
   function input(event) {
     if (!allowed()) return;
@@ -105,14 +109,12 @@
       for (let i = 1; i <= steps; i++) {
         const x = previous.x + dx * i / steps, y = previous.y + dy * i / steps;
         const born = now - elapsed * (1 - i / steps);
-        createStamp(x, y, born, angle, speed);
         bubbleTravel += distance / steps;
-        if (born - lastEmission > 30 || bubbleTravel >= Math.max(10 * scale, radius * .6)) {
+        if (born - lastEmission > 18 || bubbleTravel >= Math.max(7 * scale, radius * .34)) {
           emitBubble(x, y, born, angle, speed); lastEmission = born; bubbleTravel = 0;
         }
       }
     } else {
-      createStamp(point.x, point.y, now - 12, 0, 0);
       emitBubble(point.x, point.y, now, 0, 0); lastEmission = now; bubbleTravel = 0;
     }
     previous = point;
@@ -152,6 +154,28 @@
     [...stamp.fringe, ...stamp.splatters].forEach(dot => softCircle(dot, opacity));
     maskContext.restore();
   }
+  function paintGlow(stamp, now) {
+    const age = clamp((now - stamp.born) / lifetime, 0, 1);
+    const opacity = smooth(clamp(age / .025, 0, 1)) * Math.pow(Math.max(0, 1 - age), 1.35);
+    const intensity = clamp(trailBrightness / 1.78, .45, 1.08);
+    if (opacity < .003) return;
+    const shrink = .34 + Math.pow(1 - age, .42) * .66;
+    context.save();
+    context.globalCompositeOperation = "screen";
+    context.translate(stamp.x, stamp.y);
+    context.rotate(stamp.angle);
+    context.scale(stamp.major * shrink, stamp.minor * shrink);
+    const glow = context.createRadialGradient(-.18, -.14, .03, 0, 0, 1);
+    glow.addColorStop(0, `rgba(238,253,255,${Math.min(1, opacity * .58 * intensity)})`);
+    glow.addColorStop(.28, `rgba(112,222,255,${Math.min(1, opacity * .34 * intensity)})`);
+    glow.addColorStop(.68, `rgba(70,165,255,${Math.min(1, opacity * .13 * intensity)})`);
+    glow.addColorStop(1, "rgba(43,139,255,0)");
+    context.fillStyle = glow;
+    context.beginPath();
+    context.ellipse(0, 0, 1, .72, 0, 0, Math.PI * 2);
+    context.fill();
+    context.restore();
+  }
   function cover(target, source) {
     const w = source.videoWidth || source.naturalWidth, h = source.videoHeight || source.naturalHeight;
     if (!w || !h) return false;
@@ -172,29 +196,6 @@
     bubbleContext.clearRect(0, 0, width, height);
     canvas.dataset.stamps = String(stamps.length);
     if (!stamps.length && !bubbles.length) { previous = null; if (underlay?.tagName === "VIDEO") underlay.pause(); return; }
-    maskContext.clearRect(0, 0, width, height);
-    stamps.forEach(stamp => paintStamp(stamp, now));
-    maskContext.save(); maskContext.globalCompositeOperation = "destination-out";
-    maskContext.globalAlpha = .42; maskContext.fillStyle = grain; maskContext.fillRect(0, 0, width, height); maskContext.restore();
-    layerContext.clearRect(0, 0, width, height);
-    layerContext.globalCompositeOperation = "source-over";
-    const original = document.querySelector(document.body.dataset.backgroundMode === "image" ? ".bg-image" : ".bg-video");
-    const source = underlay && (underlay.naturalWidth || underlay.readyState >= 2) ? underlay : original;
-    layerContext.filter = source === original
-      ? `saturate(.74) brightness(${trailBrightness}) contrast(1)`
-      : `brightness(${trailBrightness})`;
-    const placement = cover(layerContext, source);
-    layerContext.filter = "none";
-    if (source === original && placement) {
-      layerContext.save();
-      layerContext.beginPath(); layerContext.rect(placement.x, placement.y, placement.width, placement.height); layerContext.clip();
-      layerContext.globalCompositeOperation = "screen";
-      layerContext.fillStyle = "rgba(130,215,250,.44)"; layerContext.fillRect(0, 0, width, height);
-      layerContext.restore();
-    }
-    layerContext.globalCompositeOperation = "destination-in";
-    layerContext.filter = `blur(${2.2 * scale}px)`; layerContext.drawImage(mask, 0, 0); layerContext.filter = "none";
-    layerContext.globalCompositeOperation = "source-over"; context.drawImage(layer, 0, 0);
     bubbles.forEach(bubble => {
       const age = (now - bubble.born) / bubble.life;
       if (age <= 0) return;
@@ -203,14 +204,14 @@
       const size = bubble.radius * (1 - age * .5);
       const x = bubble.x + bubble.vx * seconds + Math.sin(age * 4 + bubble.phase) * radius * .12 * age;
       const y = bubble.y + bubble.vy * seconds;
-      window.portfolioBubbles.paint(bubbleContext, x, y, size, opacity, bubble.phase + age);
+      window.portfolioBubbles.paint(bubbleContext, x, y, size, Math.min(1, opacity * trailBrightness / 1.4), bubble.phase + age);
     });
     schedule();
   }
   function schedule() { if (!raf && allowed()) raf = requestAnimationFrame(render); }
   function settings() {
     enabled = document.body.dataset.backgroundReveal !== "false";
-    trailBrightness = clamp(Number(document.body.dataset.trailBrightness || 140) / 100, .7, 1.9);
+    trailBrightness = clamp(Number(document.body.dataset.trailBrightness || 178) / 100, .7, 1.9);
     lifetime = clamp(Number(document.body.dataset.trailLife || 1240), 400, 2000);
     const rect = background.getBoundingClientRect();
     radius = clamp(Math.min(rect.width, rect.height) * .086, 28, Number(document.body.dataset.trailBrush || 72)) * scale;
